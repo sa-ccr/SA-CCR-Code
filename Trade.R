@@ -2,7 +2,7 @@
 # Create the base Trade class
 #
 # This class contains fields/methods that are used from all the derived trade objects
-Trade <- setRefClass("Trade",
+Trade = setRefClass("Trade",
                      fields = list(     Notional   = "numeric",
                                         MtM        = "numeric",
                                         Currency   = "character",
@@ -27,7 +27,7 @@ Trade <- setRefClass("Trade",
                          
                          return(AdjustedNotional)
                        },
-                       
+                       #' @description Test Test
                        CalcSupervDuration = function() {
                          ## calculates the supervisory duration (applicable for IRDs and Credit derivatives)
                          if(Ei<1)
