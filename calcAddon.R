@@ -2,14 +2,15 @@
 #' and dividing the trades into the corresponding netting sets per currency, timebucket  etc.
 #' 
 #' @title Calculates the Addon amount
-#' @param trades The full list of the Trade Objects  
+#' @param trades The full list of the Trade Objects
+#' @param MF (Optional) The Maturity Factor based on the collateral agreement  
 #' @return The aggregate amount of the addon summed up for all the asset classes
 #' @export
 #' @author Tasos Grivas <tasos@@openriskcalculator.com>
 #' @references Basel Committee: The standardised approach for measuring counterparty credit risk exposures
 #' http://www.bis.org/publ/bcbs279.htm
 #' 
-CalcAddon <- function(trades)  {
+CalcAddon <- function(trades, MF)  {
 ## function which will calculate the Add-On for all the trade classes
   
   superv <- LoadSupervisoryData()
@@ -43,9 +44,12 @@ CalcAddon <- function(trades)  {
         {
           AdjNotional         <- ccypairs_trades[[l]]$CalcAdjNotional()
           
+          if(missing(MF))
+          {
           # calculate maturity factor
           maturity_factor <- ccypairs_trades[[l]]$CalcMaturityFactor()
-          
+          } else
+          { maturity_factor = MF}
           # if the trade is option based then for the delta calculation the volatility will be used
           if (ccypairs_trades[[l]]$TradeType=='Option')
           {
@@ -88,8 +92,14 @@ CalcAddon <- function(trades)  {
           
           for (l in 1:length(timebuckets_trades))
           {
+            if(missing(MF))
+            {
             # calculate maturity factor
             maturity_factor     <- timebuckets_trades[[l]]$CalcMaturityFactor()
+            } else
+            {
+              maturity_factor = MF
+            }
             AdjNotional         <- timebuckets_trades[[l]]$CalcAdjNotional()
             if (timebuckets_trades[[l]]$TradeType=='Option')
             {
@@ -122,8 +132,12 @@ CalcAddon <- function(trades)  {
         
         for (k in 1:length(refEntities_trades))
         { 
+          if(missing(MF))
+          {
           # calculate maturity factor
           maturity_factor     <- refEntities_trades[[k]]$CalcMaturityFactor()
+          } else
+          { maturity_factor <- MF }
           AdjNotional         <- refEntities_trades[[k]]$CalcAdjNotional()
           superv_delta        <- refEntities_trades[[k]]$CalcSupervDelta()
           refEntities_addon[j]<- refEntities_addon[j] + AdjNotional*superv_delta*maturity_factor
@@ -160,8 +174,12 @@ CalcAddon <- function(trades)  {
           
           for (l in 1:length(com_types_trades))
           { 
+            if(missing(MF))
+            {
             # calculate maturity factor
             maturity_factor     <- com_types_trades[[l]]$CalcMaturityFactor()
+            } else
+            { maturity_factor = MF}
             AdjNotional         <- com_types_trades[[l]]$CalcAdjNotional()
             superv_delta        <- com_types_trades[[l]]$CalcSupervDelta()
             com_types_addon[k]<- com_types_addon[k] + AdjNotional*superv_delta*maturity_factor

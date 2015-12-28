@@ -20,4 +20,5 @@ trades= list(tr1,tr2,tr3)
 # calculating the Exposure-at-Default
 EAD = runExampleCalcs(trades)
 
+return(EAD)
 }
