@@ -68,7 +68,7 @@ CalcAddon <- function(trades, MF)  {
       supervisory_factor <- superv$Supervisory_factor[superv$Asset_Class==ccypairs_trades[[l]]$TradeGroup&superv$SubClass==ccypairs_trades[[l]]$SubClass]
       
       # adding up the addon of the hedging set to the trade class
-      trade_classes_addon[i]<- trade_classes_addon[i] + supervisory_factor*abs(ccypairs_addon[j])
+      trade_classes_addon[i]<- trade_classes_addon[i] + supervisory_factor*sum(abs(ccypairs_addon))
     }  else if(trade_classes[i]=='IRD')
     {
       # setting the time bucket for each of the trades
