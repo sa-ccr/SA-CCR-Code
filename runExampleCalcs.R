@@ -1,7 +1,7 @@
 runExampleCalcs <-function(trades)
 {
+  Addon_Aggregate = HandleBasisVol(trades)
   # calculating the add-on
-  Addon_Aggregate <- CalcAddon(trades)
   
   # calculating the RC and the V-c amount
   rc_values <- CalcRC(trades)

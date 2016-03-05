@@ -1,6 +1,6 @@
 #' Calculates the Exposure at Default for the FX product type
 #' @title FX Example
-#' @return The exposure at default (expected value is 364)
+#' @return The exposure at default
 #' @export
 #' @author Tasos Grivas <tasos@@openriskcalculator.com>
 #' @references Basel Committee: The standardised approach for measuring counterparty credit risk exposures

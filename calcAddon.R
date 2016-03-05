@@ -4,16 +4,20 @@
 #' @title Calculates the Addon amount
 #' @param trades The full list of the Trade Objects
 #' @param MF (Optional) The Maturity Factor based on the collateral agreement  
+#' @param factor_mult (Optional) The Multiplication Factor applicable for volatility/basis trades  
 #' @return The aggregate amount of the addon summed up for all the asset classes
 #' @export
 #' @author Tasos Grivas <tasos@@openriskcalculator.com>
 #' @references Basel Committee: The standardised approach for measuring counterparty credit risk exposures
 #' http://www.bis.org/publ/bcbs279.htm
 #' 
-CalcAddon <- function(trades, MF)  {
+CalcAddon <- function(trades, MF, factor_mult)  {
 ## function which will calculate the Add-On for all the trade classes
   
   superv <- LoadSupervisoryData()
+  
+  if(missing(factor_mult))
+    factor_mult = 1
   
   # finding all the different trade classes that have been sent to the function
   trade_classes <- unique(lapply(trades, function(x) x$TradeGroup))
@@ -65,7 +69,7 @@ CalcAddon <- function(trades, MF)  {
         }
       }
       # getting the supervisory factor
-      supervisory_factor <- superv$Supervisory_factor[superv$Asset_Class==ccypairs_trades[[l]]$TradeGroup&superv$SubClass==ccypairs_trades[[l]]$SubClass]
+      supervisory_factor <- factor_mult*superv$Supervisory_factor[superv$Asset_Class==ccypairs_trades[[l]]$TradeGroup&superv$SubClass==ccypairs_trades[[l]]$SubClass]
       
       # adding up the addon of the hedging set to the trade class
       trade_classes_addon[i]<- trade_classes_addon[i] + supervisory_factor*sum(abs(ccypairs_addon))
@@ -115,7 +119,7 @@ CalcAddon <- function(trades, MF)  {
         }
         # aggregating the add-on timebuckets recognizing correlation between each time bucket  
         currencies_addon[j] <- (timebuckets_addon[1]^2+timebuckets_addon[2]^2+timebuckets_addon[3]^2+1.4*timebuckets_addon[2]*timebuckets_addon[3]+1.4*timebuckets_addon[2]*timebuckets_addon[1]+0.6*timebuckets_addon[2]*timebuckets_addon[1])^0.5
-        supervisory_factor <- superv$Supervisory_factor[superv$Asset_Class==timebuckets_trades[[l]]$TradeGroup&superv$SubClass==timebuckets_trades[[l]]$SubClass]
+        supervisory_factor <- factor_mult*superv$Supervisory_factor[superv$Asset_Class==timebuckets_trades[[l]]$TradeGroup&superv$SubClass==timebuckets_trades[[l]]$SubClass]
         
         # adding up the addon of each currency after multiplying with the supervisory factor
         trade_classes_addon[i]<- trade_classes_addon[i] + supervisory_factor*currencies_addon[j]
@@ -144,7 +148,7 @@ CalcAddon <- function(trades, MF)  {
         }
         
         AssetClass<-paste(refEntities_trades[[1]]$TradeGroup,refEntities_trades[[1]]$TradeType,sep="")
-        supervisory_factor <- superv$Supervisory_factor[superv$Asset_Class==AssetClass&superv$SubClass==refEntities_trades[[1]]$SubClass]
+        supervisory_factor <- factor_mult*superv$Supervisory_factor[superv$Asset_Class==AssetClass&superv$SubClass==refEntities_trades[[1]]$SubClass]
         refEntities_addon[j] <- refEntities_addon[j]*supervisory_factor
         supervisory_corel[j]  <- superv$Correlation[superv$Asset_Class==AssetClass&superv$SubClass==refEntities_trades[[1]]$SubClass]
       }
@@ -185,7 +189,7 @@ CalcAddon <- function(trades, MF)  {
             com_types_addon[k]<- com_types_addon[k] + AdjNotional*superv_delta*maturity_factor
           }
           
-          supervisory_factor <- superv$Supervisory_factor[superv$Asset_Class==AssetClass&(superv$SubClass==HedgingSets_trades[[1]]$SubClass|superv$SubClass==HedgingSets_trades[[1]]$commodity_type)]
+          supervisory_factor <- factor_mult*superv$Supervisory_factor[superv$Asset_Class==AssetClass&(superv$SubClass==HedgingSets_trades[[1]]$SubClass|superv$SubClass==HedgingSets_trades[[1]]$commodity_type)]
           com_types_addon[k]<- com_types_addon[k]*supervisory_factor
         }
         supervisory_corel     <- superv$Correlation[superv$Asset_Class==AssetClass&(superv$SubClass==HedgingSets_trades[[1]]$SubClass|superv$SubClass==HedgingSets_trades[[1]]$commodity_type)]

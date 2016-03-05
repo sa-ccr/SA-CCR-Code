@@ -52,8 +52,11 @@ Trade = setRefClass("Trade",
                          } else
                          {
                            # in the option case the supervisory volatility is being populated
-                           # the delta calculation is based on the Black-Scholes formula  
-                           temp = (log(UnderlyingPrice/StrikePrice)+0.5*Superv_Vol^2*Si)/Superv_Vol*Si^0.5;
+                           # the delta calculation is based on the Black-Scholes formula
+                           if(UnderlyingPrice*StrikePrice<0)
+                             temp = (UnderlyingPrice-StrikePrice)/Superv_Vol*Si^0.5
+                           else
+                             temp = (log(UnderlyingPrice/StrikePrice)+0.5*Superv_Vol^2*Si)/Superv_Vol*Si^0.5;
                            
                            if(BuySell=="Buy")
                            {
