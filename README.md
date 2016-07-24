@@ -9,6 +9,5 @@ A few words about the code:
 2. The calcAddon function performs all the necessary groupings and aggregations per netting set and returns the aggregate Addon amount.
 3. The supervisory factors values are being read through a csv file.
 4. All the examples of the regulatory paper have been implemented (ExampleIRD.R contains the code for the IRDs case etc)
-5. Features like maturity depending on the underlying, base transactions etc are not implemented in the open source version.
 
 If you want to become a contributor to the project or use this code for commercial purposes or for any other queries please contact us at info@openriskcalculator.com or visit our website www.openriskcalculator.com
