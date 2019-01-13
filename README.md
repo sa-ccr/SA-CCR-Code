@@ -12,9 +12,6 @@ A few words about the code:
 
 If you want to become a contributor to the project or use this code for commercial purposes or for any other queries please contact us at info@openriskcalculator.com or visit our website www.openriskcalculator.com
 
-## Donate 
-
-https://www.paypal.com/donate?token=Uh-hiCEConkQoPwNRxeXpBsDOWOpjJbGk5ypDEsYs90MvCcUGrGCBU-9DJrBP17ibVLGSG
-
+# Donate 
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8HBDDB9MHXUTA)
