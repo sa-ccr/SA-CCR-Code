@@ -12,11 +12,9 @@ A few words about the code:
 
 If you want to become a contributor to the project or use this code for commercial purposes or for any other queries please contact us at info@openriskcalculator.com or visit our website www.openriskcalculator.com
 
-## Donate https://www.paypal.com/donate?token=Uh-hiCEConkQoPwNRxeXpBsDOWOpjJbGk5ypDEsYs90MvCcUGrGCBU-9DJrBP17ibVLGSG&country.x=GR&locale.x=GR
+## Donate 
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick" />
-<input type="hidden" name="hosted_button_id" value="8HBDDB9MHXUTA" />
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-<img alt="" border="0" src="https://www.paypal.com/en_GR/i/scr/pixel.gif" width="1" height="1" />
-</form>
+https://www.paypal.com/donate?token=Uh-hiCEConkQoPwNRxeXpBsDOWOpjJbGk5ypDEsYs90MvCcUGrGCBU-9DJrBP17ibVLGSG
+
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8HBDDB9MHXUTA)
