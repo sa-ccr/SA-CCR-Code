@@ -14,4 +14,6 @@ If you want to become a contributor to the project or use this code for commerci
 
 # Donate 
 
+If you have found this software of use, please consider supporting us by donating below:
+
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=8HBDDB9MHXUTA)
