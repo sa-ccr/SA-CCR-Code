@@ -1,16 +1,12 @@
 # SA-CCR
 
-This repository contains a prototype implementation of the Basel III Standardized Approach for Counterparty Credit Risk Management. (you can view the regulation here: http://www.bis.org/publ/bcbs279.htm)
+R package implementing the Standardized Approach for the Counterparty Credit Risk Management (SA-CCR) of the Basel III Regulatory framework.
 
+This repository contains a full implementation of the Basel III Standardized Approach for Counterparty Credit Risk Management. (you can view the regulation here: http://www.bis.org/publ/bcbs279.htm). Also, the follow up FAQ improvements have been implemented.
 
-A few words about the code:
+Computes the Exposure-At-Default based on standardized approach of the Basel III Regulatory framework (SA-CCR). Currently, trade types of all the five major asset classes have been created and, given the inheritance- based structure of the application, the addition of further trade types is straightforward. The application returns a list of trees (one per CSA) after automatically separating the trades based on the CSAs, the hedging sets, the netting sets and the risk factors. The basis and volatility transactions are also identified and treated in specific hedging sets whereby the corresponding penalty factors are applied. All the examples appearing on the regulatory paper (including the margined and the un-margined workflow) have been implemented.
 
-1. The trade structure is based on an Object Oriented Hierarchy where the Trade class  contains methods which apply for the all the trade types. For example, for the calculation of the supervisory delta, the supervisory duration etc a polymorphic method from the Trade class is being called. 
-2. The calcAddon function performs all the necessary groupings and aggregations per netting set and returns the aggregate Addon amount.
-3. The supervisory factors values are being read through a csv file.
-4. All the examples of the regulatory paper have been implemented (ExampleIRD.R contains the code for the IRDs case etc)
-
-If you want to become a contributor to the project or use this code for commercial purposes or for any other queries please contact us at info@openriskcalculator.com or visit our website www.openriskcalculator.com
+If you want to become a contributor to this project, use this code for commercial purposes or for any other queries please contact us at info@openriskcalculator.com or visit our website www.openriskcalculator.com
 
 # Donate 
 
