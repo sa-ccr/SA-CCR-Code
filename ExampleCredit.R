@@ -10,9 +10,9 @@
 ExampleCredit =function(JSON = FALSE)
 {
   requireNamespace("Trading")
-tr1 = Trading::CreditSingle(external_id = "ext_1",Notional=10000,MtM=20,Currency="USD",Si=0,Ei=3,BuySell='Buy',SubClass='AA',RefEntity='FirmA')
-tr2 = Trading::CreditSingle(external_id = "ext_2",Notional=10000,MtM=-40,Currency="EUR",Si=0,Ei=6,BuySell='Sell',SubClass='BBB',RefEntity='FirmB')
-tr3 = Trading::CreditIndex(external_id = "ext_3",Notional=10000,MtM=0,Currency="USD",Si=0,Ei=5,BuySell='Buy',SubClass='IG',RefEntity='CDX.IG')
+tr1 = Trading::CDS(external_id = "ext_1",Notional=10000,MtM=20,Currency="USD",Si=0,Ei=3,BuySell='Buy',SubClass='AA',RefEntity='FirmA')
+tr2 = Trading::CDS(external_id = "ext_2",Notional=10000,MtM=-40,Currency="EUR",Si=0,Ei=6,BuySell='Sell',SubClass='BBB',RefEntity='FirmB')
+tr3 = Trading::CDX(external_id = "ext_3",Notional=10000,MtM=0,Currency="USD",Si=0,Ei=5,BuySell='Buy',SubClass='IG',RefEntity='CDX.IG')
 
 trades= list(tr1,tr2,tr3)
 

@@ -3,13 +3,14 @@
 #' @param trades The full list of the Trade Objects 
 #' @param csa (Optional) The CSA objects
 #' @param collaterals (Optional) The collaterals Objects
+#' @param simplified (optional) When TRUE, collaterals will be ignored as per the simplified & OEM approach
 #' @return The replacement Cost and the sum of the MtMs
 #' @export
 #' @author Tasos Grivas <tasos@@openriskcalculator.com>
-#' @references Basel Committee: The standardised approach for measuring counterparty credit risk exposures
-#' http://www.bis.org/publ/bcbs279.htm
+#' @references Regulation (EU) 2019/876 of the European Parliament and of the Council of 20 May 2019
+#' http://data.europa.eu/eli/reg/2019/876/oj
 
-CalcRC <- function(trades, csa, collaterals)  {
+CalcRC <- function(trades, csa, collaterals, simplified)  {
   
   V <- sum(sapply(trades, function(x) x$MtM))
   
@@ -46,8 +47,14 @@ CalcRC <- function(trades, csa, collaterals)  {
       {        current_collateral = current_collateral + collaterals[[i]]$Amount      }
     }
     
-    V_C <- V - current_collateral
-    RC  <- max(V_C, thres_cpty + MTA_cpty- IM_cpty,0)
+    if(simplified)
+    {
+      V_C = V
+      RC  <- max(V_C, thres_cpty + MTA_cpty,0)
+    }else{
+      V_C <- V - current_collateral
+      RC  <- max(V_C, thres_cpty + MTA_cpty- IM_cpty,0)
+    }
     }else
     {
       V_C <- V

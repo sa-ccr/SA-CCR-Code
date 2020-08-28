@@ -3,20 +3,26 @@
 #' @title Calculates the PFE
 #' @param V_C the difference between the sum of the MtMs and the collateral
 #' @param Addon_Aggregate the aggregate amount of the Addon
+#' @param simplified (optional) When TRUE, the multiplier will be set to 1  as per the simplified & OEM approach
 #' @return The Projected Future Exposure (PFE)
 #' @export
-#' @author Project team <info@@openriskcalculator.com>
-#' @references Basel Committee: The standardised approach for measuring counterparty credit risk exposures
-#' http://www.bis.org/publ/bcbs279.htm
+#' @author Tasos Grivas <info@@openriskcalculator.com>
+#' @references Regulation (EU) 2019/876 of the European Parliament and of the Council of 20 May 2019
+#' http://data.europa.eu/eli/reg/2019/876/oj
 
-CalcPFE <- function(V_C,Addon_Aggregate)  {
+CalcPFE <- function(V_C,Addon_Aggregate, simplified)  {
   
-  if (V_C<0){
-    multiplier <- min( 1, 0.05 + 0.95 * exp(V_C/(1.9*Addon_Aggregate)))
-  }else  
-  { multiplier <- 1}
+  if(simplified)
+  {  multiplier = 1
+  }else
+  {
+    if (V_C<0){
+      multiplier = min( 1, 0.05 + 0.95 * exp(V_C/(1.9*Addon_Aggregate)))
+    }else  
+    { multiplier = 1}
+  }
   
-  PFE <- multiplier * Addon_Aggregate
+  PFE = multiplier * Addon_Aggregate
   
   return(PFE)
 }

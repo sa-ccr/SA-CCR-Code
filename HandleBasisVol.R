@@ -4,8 +4,8 @@
 #' @return A list depicting which trade IDs fall under each hedging set.
 #' @export
 #' @author Tasos Grivas <tasos@@openriskcalculator.com>
-#' @references Basel Committee: The standardised approach for measuring counterparty credit risk exposures
-#' http://www.bis.org/publ/bcbs279.htm
+#' @references Regulation (EU) 2019/876 of the European Parliament and of the Council of 20 May 2019
+#' http://data.europa.eu/eli/reg/2019/876/oj
 #'
 HandleBasisVol <- function(trades)  {
 
@@ -49,14 +49,14 @@ HandleBasisVol <- function(trades)  {
   }
   if(length(vol_trades)!=0)
   {
-    vol_hedging_sets = unique(lapply(vol_trades, function(x) x$reference))
+    vol_hedging_sets = unique(lapply(vol_trades, function(x) x$Underlying_Instrument))
     
     vol_trade_ids = list()
     vol_trade_ids_all = array()
     for (i in 1:length(vol_hedging_sets))
     {
       #picking up the trades belonging to this specific hedging set
-      group_trades <- vol_trades[sapply(vol_trades, function(x) x$reference==vol_hedging_sets[i])]
+      group_trades <- vol_trades[sapply(vol_trades, function(x) x$Underlying_Instrument==vol_hedging_sets[i])]
       vol_trade_ids[[i]] = sapply(group_trades, function(x) x$external_id)
       vol_trade_ids_all = c(vol_trade_ids_all, vol_trade_ids[[i]])
     }

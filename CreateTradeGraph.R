@@ -16,7 +16,9 @@ CreateTradeGraph <- function(trades)  {
   
   trade_classes_addon <- array(data<-0,dim<-length(trade_classes))
   
-  head_node <- data.tree::Node$new("Trades Tree")
+  cpty_name <- as.character(unique(lapply(trades, function(x) x$Counterparty)))
+  
+  head_node <- data.tree::Node$new(cpty_name)
   
   asset_classes = head_node$AddChild("Asset Classes")
   
@@ -29,30 +31,23 @@ CreateTradeGraph <- function(trades)  {
   for (i in 1:length(trade_classes))
   {  
     group_trades <- trades[sapply(trades, function(x) x$TradeGroup==trade_classes[i])]
-  
+    
     if(trade_classes[i]=="FX")
-    {
-      trade_classes_tree[[i]] = GroupTrades(group_trades, GroupFXTrades, trade_classes_tree[[i]])
-
-    } else if(trade_classes[i]=="IRD")
+    {      trade_classes_tree[[i]] = GroupTrades(group_trades, GroupFXTrades, trade_classes_tree[[i]])
+    }else if(trade_classes[i]=="IRD")
     {
       # setting the time bucket for each of the trades
       lapply(group_trades, function(x) x$TimeBucket <- x$SetTimeBucket())
       trade_classes_tree[[i]] = GroupTrades(group_trades, GroupIRDTrades, trade_classes_tree[[i]])
-      
     }else  if(trade_classes[i]=='Credit')
-    {
-      trade_classes_tree[[i]] = GroupTrades(group_trades, GroupCreditTrades, trade_classes_tree[[i]])
+    {      trade_classes_tree[[i]] = GroupTrades(group_trades, GroupCreditTrades, trade_classes_tree[[i]])
     }else   if(trade_classes[i]=='Commodity')
-    {
-      trade_classes_tree[[i]] = GroupTrades(group_trades, GroupCommTrades, trade_classes_tree[[i]])
+    {      trade_classes_tree[[i]] = GroupTrades(group_trades, GroupCommTrades, trade_classes_tree[[i]])
     }else   if(trade_classes[i]=='EQ')
-    {
-      trade_classes_tree[[i]] = GroupTrades(group_trades, GroupEquityTrades, trade_classes_tree[[i]])
+    {      trade_classes_tree[[i]] = GroupTrades(group_trades, GroupEquityTrades, trade_classes_tree[[i]])
+    }else   if(trade_classes[i]=='OtherExposure')
+    {      trade_classes_tree[[i]] = GroupTrades(group_trades, GroupOtherTrades, trade_classes_tree[[i]])
     }
-    
-    
-  
-}
+  }
   return(head_node)
 }

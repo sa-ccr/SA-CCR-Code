@@ -6,8 +6,8 @@
 #' @return A list of addon information
 #' @export
 #' @author Tasos Grivas <tasos@@openriskcalculator.com>
-#' @references Basel Committee: The standardised approach for measuring counterparty credit risk exposures
-#' http://www.bis.org/publ/bcbs279.htm
+#' @references Regulation (EU) 2019/876 of the European Parliament and of the Council of 20 May 2019
+#' http://data.europa.eu/eli/reg/2019/876/oj
 #' 
 SingleTradeAddon = function(trade,MF)
 {
@@ -27,6 +27,19 @@ SingleTradeAddon = function(trade,MF)
     {
       superv <- LoadSupervisoryData()
       trade_results$volatility   <- superv$Supervisory_option_volatility[superv$Asset_Class==trade$TradeGroup&superv$SubClass==trade$SubClass]
+      if(length(trade_results$volatility)==0)
+      {
+        if(superv$Asset_Class=='Commodity')
+        {          
+          if(trade$commodity_type=='Electricity')
+          {trade_results$volatility = 1.5
+          }else
+          {trade_results$volatility = 0.7}
+        }else if(superv$Asset_Class=='Other')
+        {          trade_results$volatility = 1.5}
+        else
+        {          trade_results$volatility = 1.5}
+      }
       trade_results$superv_delta <- trade$CalcSupervDelta(trade_results$volatility)
     }
     else
