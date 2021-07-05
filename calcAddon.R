@@ -309,7 +309,7 @@ CalcAddon <- function(trades_tree, MF, simplified = FALSE, OEM = FALSE)  {
           {  refEntities[[refEntities_names[j]]]$add_on <- refEntities[[refEntities_names[j]]]$add_on  + refEntities_trade$exposure_details$effective_notional          }
           
         }
-        AssetClass<-paste(refEntities_trade$trade$TradeGroup,refEntities_trade$trade$TradeType,sep="")
+        AssetClass<-asset_class_names[i]
         
         if(OEM)
         {  supervisory_factor = 0.32

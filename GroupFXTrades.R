@@ -1,5 +1,7 @@
 GroupFXTrades = function(group_trades, trade_classes_tree,hedging_set_name)
 {
+  lapply(group_trades, function(x) x$base_ccy="EUR")
+  lapply(group_trades, function(x) x$setFXDynamic())
   
   # for the FX case the Hedging sets will be created based on the ccy pair
   ccypairs   <- unique(lapply(group_trades, function(x) x$ccyPair))

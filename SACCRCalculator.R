@@ -7,13 +7,14 @@
 #' @param simplified (optional) if TRUE, the simplified SA-CCR is being calculated
 #' @param OEM (optional) if TRUE, the Original Exposure Method is being calculated
 #' @param export_results (optional) if TRUE, a csv with the exposure at the top level will be exported
+#' @param ignore_margin (optional) if TRUE, the margin agreement workflow will be turned off
 #' @return The relevant exposure trees
-#' @export
+#' @export 
 #' @author Tasos Grivas <tasos@@openriskcalculator.com>
 #' @references Regulation (EU) 2019/876 of the European Parliament and of the Council of 20 May 2019
 #' http://data.europa.eu/eli/reg/2019/876/oj
 
-SACCRCalculator = function(trades_filename, csa_filename, coll_filename, JSON = FALSE, simplified = FALSE, OEM = FALSE, export_results = FALSE)
+SACCRCalculator = function(trades_filename, csa_filename, coll_filename, JSON = FALSE, simplified = FALSE, OEM = FALSE, export_results = FALSE, ignore_margin = FALSE)
 {
   options(warn=-1)
   
@@ -48,7 +49,7 @@ SACCRCalculator = function(trades_filename, csa_filename, coll_filename, JSON = 
       colls[[i]]$PopulateViaCSV(coll_raw[i,])
     }
   }
-  trees = runExampleCalcs(trades, csas, colls, simplified = simplified, OEM = OEM)
+  trees = runExampleCalcs(trades, csas, colls, simplified = simplified, OEM = OEM, ignore_margin = ignore_margin)
   
   trees_length = length(trees)
   

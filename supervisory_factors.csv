@@ -11,9 +11,7 @@ CreditSingle,CCC,6.00%,50%,100%
 CreditIndex,IG,0.38%,80%,80%
 CreditIndex,SG,1.06%,80%,80%
 EQ, ,32%,50%,120%
-EQIndex, ,20%,80%,75%
+EQ,Index,20%,80%,75%
 Commodity,Electricity,40%,40%,150%
-Commodity,Oil/Gas,18%,40%,70%
-Commodity,Metals,18%,40%,70%
-Commodity,Agricultural,18%,40%,70%
 Commodity,Other,18%,40%,70%
+OtherExposure,,8%,0%,150%
