@@ -10,9 +10,9 @@
 ExampleComm =function(JSON = FALSE)
 {
   requireNamespace("Trading")
-tr1 = Trading::Commodity(external_id = "ext_1",Notional=10000,MtM= -50,Si=0,Ei=0.75,BuySell='Buy',SubClass='Energy',commodity_type='Oil/Gas')
-tr2 = Trading::Commodity(external_id = "ext_2",Notional=20000,MtM= -30,Si=0,Ei=2,BuySell='Sell',SubClass='Energy',commodity_type='Oil/Gas')
-tr3 = Trading::Commodity(external_id = "ext_3",Notional=10000,MtM= 100,Si=0,Ei=5,BuySell='Buy',SubClass='Metals',commodity_type='Silver')
+tr1 = Trading::Commodity(external_id = "ext_1",Notional=10000,MtM= -50,Si=0,Ei=0.75,BuySell='Buy',SubClass='Energy',commodity_type='Oil/Gas',Counterparty='Commodity Example')
+tr2 = Trading::Commodity(external_id = "ext_2",Notional=20000,MtM= -30,Si=0,Ei=2,BuySell='Sell',SubClass='Energy',commodity_type='Oil/Gas',Counterparty='Commodity Example')
+tr3 = Trading::Commodity(external_id = "ext_3",Notional=10000,MtM= 100,Si=0,Ei=5,BuySell='Buy',SubClass='Metals',commodity_type='Silver',Counterparty='Commodity Example')
 
 trades= list(tr1,tr2,tr3)
 

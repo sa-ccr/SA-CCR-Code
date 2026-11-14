@@ -4,7 +4,7 @@ runExampleCalcs <-function(trades, csas, colls, simplified = FALSE, OEM = FALSE,
   {
     if(all(unlist(lapply(trades,function(x) x$TradeType=='Option'&toupper(x$BuySell)=='SELL'))))
     { 
-      cat('All trades are sold options, EAD is zero')
+      message('All trades are sold options, EAD is zero')
       return(0)
     }
   }

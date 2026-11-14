@@ -16,7 +16,6 @@
 
 SACCRCalculator = function(trades_filename, csa_filename, coll_filename, JSON = FALSE, simplified = FALSE, OEM = FALSE, export_results = FALSE, ignore_margin = FALSE)
 {
-  options(warn=-1)
   
   if(OEM) simplified = TRUE
   
@@ -83,7 +82,7 @@ SACCRCalculator = function(trades_filename, csa_filename, coll_filename, JSON = 
       to_be_exported$Replacement_cost_VC[i] = trees[[i]]$`Replacement Cost`$V_C
       to_be_exported$Replacement_cost[i] = trees[[i]]$`Replacement Cost`$RC
     }
-    write.csv(to_be_exported,'exposure_per_counterparty.csv',row.names = FALSE)
+    write.csv(to_be_exported,paste0(tempdir(),'\\','exposure_per_counterparty.csv'),row.names = FALSE)
   }
 
   

@@ -12,9 +12,9 @@ ExampleIRD =function(JSON = FALSE)
 
   requireNamespace("Trading")
 # creating the trade objects and storing them in a list
-tr1 = Trading::IRDSwap(external_id = "ext_1",Notional=10000,MtM=30,Currency="USD",Si=0,Ei=10,BuySell='Buy')
-tr2 = Trading::IRDSwap(external_id = "ext_2",Notional=10000,MtM=-20,Currency="USD",Si=0,Ei=4,BuySell='Sell')
-tr3 = Trading::IRDSwaption(external_id = "ext_3",Notional=5000,MtM=50,Currency="EUR",Si=1,Ei=11,BuySell='Buy',OptionType='Put',UnderlyingPrice=0.06,StrikePrice=0.05)
+tr1 = Trading::IRDSwap(external_id = "ext_1",Notional=10000,MtM=30,Currency="USD",Si=0,Ei=10,BuySell='Buy',Counterparty='IRD Example')
+tr2 = Trading::IRDSwap(external_id = "ext_2",Notional=10000,MtM=-20,Currency="USD",Si=0,Ei=4,BuySell='Sell',Counterparty='IRD Example')
+tr3 = Trading::IRDSwaption(external_id = "ext_3",Notional=5000,MtM=50,Currency="EUR",Si=1,Ei=11,BuySell='Buy',OptionType='Put',UnderlyingPrice=0.06,StrikePrice=0.05,Counterparty='IRD Example')
 
 trades= list(tr1,tr2,tr3)
 
